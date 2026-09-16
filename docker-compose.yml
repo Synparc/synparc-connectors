@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  samba-ad:
+    image: wheelybird/samba-ad-dc:latest
+    container_name: synparc-ad-mock
+    environment:
+      - SAMBA_DOMAIN=synparc.local
+      - SAMBA_REALM=SYNPARC.LOCAL
+      - SAMBA_PASSWORD=AdminPassword123!
+    ports:
+      - "389:389"
+      - "636:636"
+    restart: unless-stopped
+    volumes:
+      - samba_ad_data:/var/lib/samba
+
+volumes:
+  samba_ad_data:
